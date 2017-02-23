@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Sample of basic Service Worker registration.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Service Worker API Examples: Basic Registration</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+
+  <body>
+    <h1 class="title"><small>Service Worker API Examples</small>Basic Registration</h1>
+
+    <p>
+      This page demonstrates a <em>service worker</em> registration and activation cycle.<br>
+      Use the monitor below to get updated on what the worker is doing in the background.<br>
+      Use Chrome's inspector (Application -> Service Workers) to check worker's details.
+    </p>
+
+    <div id="monitor">
+      <p>
+        <span class="label">Registration:</span>
+        <strong id="registration"></strong>
+      </p>
+      <p>
+        <span class="label">Controller:</span>
+        <strong id="controller"></strong>
+      </p>
+      <p>
+        <span class="label">State:</span>
+        <strong id="state"></strong>
+      </p>
+      <p>
+        <span class="label">Transitions:</span>
+        <strong id="transition"></strong>
+      </p>
+    </div>
+
+    <script>
+
+      if ('serviceWorker' in navigator) {
+
+        const registrationLabel = document.querySelector('#registration');
+        const controllerLabel   = document.querySelector('#controller');
+        const stateLabel        = document.querySelector('#state');
+        const transitionLabel   = document.querySelector('#transition');
+
+        // Check if there's a service worker already controlling the page
+        controllerLabel.textContent = navigator.serviceWorker.controller ? 'YES' : 'NO';
+
+        // Set scope so that this service worker will control everything underneath current directory.
+        navigator.serviceWorker.register('service-worker.js', {scope: './'}).then(function(registration) {
+
+          // Service worker is registered! Will not do anything until this page is reloaded.
+          registrationLabel.textContent = 'succeeded';
+
+          // Check activation status of the service worker
+          let serviceWorker;
+          if (registration.installing) {
+            serviceWorker = registration.installing;
+            stateLabel.textContent = 'installing';
+          } else if (registration.waiting) {
+            serviceWorker = registration.waiting;
+            stateLabel.textContent = 'waiting';
+          } else if (registration.active) {
+            serviceWorker = registration.active;
+            stateLabel.textContent = 'active';
+          }
+
+          // Listen for 'statechange' to get state transitions
+          if (serviceWorker) {
+            transitionLabel.textContent = serviceWorker.state;
+            serviceWorker.addEventListener('statechange', function(e) {
+              transitionLabel.textContent += ' -> ' + serviceWorker.state;
+            });
+          }
+
+        }).catch(function(error) {
+
+          // Something went wrong during registration
+          registrationLabel.textContent = error;
+
+        });
+
+      } else {
+
+        // The current browser doesn't support service workers :(
+        registrationLabel.textContent = 'not supported';
+
+      }
+
+    </script>
+  </body>
+</html>
