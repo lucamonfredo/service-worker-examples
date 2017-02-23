@@ -16,20 +16,55 @@ p {
   line-height: 1.5;
 }
 
+h1 {
+  font-size: 2rem;
+  border-bottom: 2px solid #7ab317;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+a {
+  text-decoration: none;
+  color: #7ab317;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .title {
   margin-bottom: 0.5em;
   padding-bottom: 0.25em;
-  font-size: 2rem;
   font-weight: 400;
   line-height: 1.25;
-  border-bottom: 2px solid #7ab317;
 }
 
 .title small {
   display: block;
-  font-size: 1.2rem;
+  font-size: 0.6em;
   font-weight: 400;
   color: #999;
+}
+
+.example-list {
+  list-style: disc;
+  margin: 2rem 0 2rem 1.25rem;
+  padding: 0;
+}
+
+.example-list .title {
+  margin-bottom: 0;
+}
+
+.example-list p {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.example-list a + p {
+  margin-top: 0;
 }
 
 #monitor {
