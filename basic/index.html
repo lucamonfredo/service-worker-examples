@@ -58,13 +58,13 @@
           // Check activation status of the service worker
           let serviceWorker;
           if (registration.installing) {
-            serviceWorker = registration.installing;
+            serviceWorker          = registration.installing;
             stateLabel.textContent = 'installing';
           } else if (registration.waiting) {
-            serviceWorker = registration.waiting;
+            serviceWorker          = registration.waiting;
             stateLabel.textContent = 'waiting';
           } else if (registration.active) {
-            serviceWorker = registration.active;
+            serviceWorker          = registration.active;
             stateLabel.textContent = 'active';
           }
 
