@@ -16,6 +16,15 @@ p {
   line-height: 1.5;
 }
 
+p.centered {
+  text-align: center;
+}
+
+p.centered img {
+  display: inline-block;
+  margin: auto;
+}
+
 h1 {
   font-size: 2rem;
   border-bottom: 2px solid #7ab317;
@@ -76,6 +85,16 @@ a:hover {
 #monitor .label {
   display: inline-block;
   min-width: 6rem;
+}
+
+#monitor .title {
+  margin: 0 0 1em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid #ccc;
+}
+
+#monitor p {
+  margin: 0;
 }
 
 #monitor strong {
