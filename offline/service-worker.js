@@ -13,7 +13,7 @@ self.addEventListener('install', event => {
         return cache.addAll([
           '.',
           './index.html',
-          '../style.css',
+          '/style.css',
           './offline-page1.html',
           './offline-page2.html',
           './fallback-page.html',
